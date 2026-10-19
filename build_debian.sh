@@ -17,9 +17,10 @@ UPSTREAM_URL="https://downloads.mitmproxy.org/${mitmproxy_VERSION}"
 
 # Function to map Debian architecture to the mitmproxy release asset name.
 # Upstream uses the kernel spelling (x86_64, aarch64). The binaries are
-# self-contained PyInstaller builds that bundle Python and OpenSSL and only
-# need glibc 2.14, so they run on every suite we target and need no library
-# dependencies.
+# self-contained PyInstaller builds that bundle Python and OpenSSL. The
+# launcher needs glibc 2.14 (amd64) / 2.17 (arm64) and libz.so.1, and the
+# .so files it unpacks at runtime (bcrypt, cryptography) need glibc 2.28,
+# hence Depends: libc6 (>= 2.28), zlib1g. libgcc_s.so.1 is bundled.
 get_mitmproxy_release() {
     local arch=$1
     case "$arch" in

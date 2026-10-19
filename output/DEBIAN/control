@@ -6,6 +6,7 @@ Homepage: https://mitmproxy.org
 Package: mitmproxy
 Version: mitmproxy_VERSION-BUILD_VERSION~griffo
 Architecture: SUPPORTED_ARCHITECTURES
+Depends: libc6 (>= 2.28), zlib1g
 Description: interactive TLS-capable intercepting HTTP proxy
  mitmproxy is a free and open source interactive HTTPS proxy for penetration
  testers and software developers. It intercepts, inspects, modifies and

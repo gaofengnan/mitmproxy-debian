@@ -14,7 +14,7 @@ PACKAGE_NAME="mitmproxy"
 ORIG_TARBALL="${PACKAGE_NAME}_${mitmproxy_VERSION}.orig.tar.gz"
 BUILD_DIR="${PACKAGE_NAME}-${mitmproxy_VERSION}"
 
-echo "Creating Debian/Ubuntu source packages for mitmproxy ${mitmproxy_VERSION}-${BUILD_VERSION}..."
+echo "Creating the source package for mitmproxy ${mitmproxy_VERSION}-${BUILD_VERSION}..."
 
 # Download upstream source tarball (shared .orig.tar.gz across all distributions).
 # Upstream tags carry a "v" prefix, but GitHub strips it from the archive's top
@@ -29,10 +29,9 @@ else
 fi
 
 build_source_package() {
-    local dist=$1
-    local FULL_VERSION="${mitmproxy_VERSION}-${BUILD_VERSION}~${dist}"
+    local FULL_VERSION="${mitmproxy_VERSION}-${BUILD_VERSION}~griffo"
 
-    echo "  Building source package for ${dist} (${FULL_VERSION})..."
+    echo "  Building source package ${FULL_VERSION}..."
 
     # Clean and recreate build directory from orig tarball
     rm -rf "$BUILD_DIR"
@@ -42,9 +41,9 @@ build_source_package() {
     # Copy Debian packaging directory
     cp -r debian "$BUILD_DIR/"
 
-    # Generate distribution-specific changelog (overwrites placeholder)
+    # Generate the changelog (overwrites placeholder)
     cat > "$BUILD_DIR/debian/changelog" << EOC
-mitmproxy (${FULL_VERSION}) ${dist}; urgency=medium
+mitmproxy (${FULL_VERSION}) stable; urgency=medium
 
   * New upstream release ${mitmproxy_VERSION}.
 
@@ -59,18 +58,8 @@ EOC
 }
 
 echo ""
-echo "Building Debian source packages..."
-DEBIAN_DISTS=("bookworm" "trixie" "forky" "sid")
-for dist in "${DEBIAN_DISTS[@]}"; do
-    build_source_package "$dist"
-done
-
-echo ""
-echo "Building Ubuntu source packages..."
-UBUNTU_DISTS=("jammy" "noble" "questing" "resolute")
-for dist in "${UBUNTU_DISTS[@]}"; do
-    build_source_package "$dist"
-done
+# One source package for every suite, as with the binaries (see build_debian.sh).
+build_source_package
 
 echo ""
 echo "Source packages created successfully!"

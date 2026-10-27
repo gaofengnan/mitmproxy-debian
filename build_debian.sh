@@ -82,9 +82,9 @@ build_architecture() {
     # Upstream ships self-contained Linux binaries for amd64/arm64 only, and
     # both work on every Debian and Ubuntu suite we target.
     # One package for every suite: upstream ships one binary per architecture,
-    # so only the old ~<suite> version suffix ever differed. The fixed ~griffo
+    # so only the old ~<suite> version suffix ever differed. The fixed ~gaofn
     # keeps it below the distro's own build of the same version.
-    FULL_VERSION="$mitmproxy_VERSION-${BUILD_VERSION}~griffo_${build_arch}"
+    FULL_VERSION="$mitmproxy_VERSION-${BUILD_VERSION}~gaofn_${build_arch}"
     echo "  Building $FULL_VERSION"
 
     if ! docker build . -t "mitmproxy-$build_arch" \

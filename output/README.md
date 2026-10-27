@@ -2,6 +2,8 @@
 
 # mitmproxy
 
+> Fork of [dariogriffo/mitmproxy-debian](https://github.com/dariogriffo/mitmproxy-debian) (MIT); the original packaging is by Dario Griffo. Served at [deb.gaofn.xyz](https://deb.gaofn.xyz) for Debian 12 (bookworm) and 13 (trixie).
+
 **An interactive TLS-capable intercepting HTTP proxy for penetration testers and software developers.**
 
 ![GitHub Release](https://img.shields.io/github/v/release/mitmproxy/mitmproxy?display_name=tag&color=%23a6a)
